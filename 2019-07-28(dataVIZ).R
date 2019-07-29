@@ -97,3 +97,27 @@ ggplot( data = SalesTableAmount) +
        x = 'Product',
        y = 'Sales_Amount in total',
        fill = 'Product_Name') + theme_bw()
+
+# table 4
+SalesTableClient <- SalesTableNew %>%
+  group_by(Client_Name, Product_Name) %>%
+  summarise(Sales = sum(Sales))
+
+# plot 7 facet_wrap( ~ Client_Name)
+ggplot(data = SalesTableClient) +
+  geom_bar(aes(x = Product_Name,
+               y = Sales),
+           stat = 'identity') +
+  facet_wrap( ~ Client_Name)
+
+# table 5
+SalesTableAgency <- SalesTableNew %>%
+  group_by(Agency, Product_Name) %>%
+  summarise( Sales = sum(Sales))
+
+# plot 8
+ggplot( data = SalesTableAgency) +
+  geom_bar( aes( x = Product_Name,
+                 y = Sales),
+            stat = 'identity') +
+  facet_wrap( ~ Agency)
